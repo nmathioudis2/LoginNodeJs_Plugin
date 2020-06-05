@@ -1,26 +1,49 @@
+const JWT = require('jsonwebtoken');
 const User = require('../models/user');
+const {JWT_SECRET} = require('../configuration');
+
+signToken = (user) => {
+    //create token with JWT.sign which takes object  as payload(first parameter) and a secret to encode the token(2nd parameter) and check if true
+    return JWT.sign({
+        iss: 'LoginModule',                                     //who is the issuer
+        sub: user.id,                                       //the _id from user in mongodb is the subject
+        iat: new Date().getTime(),                              //time issued
+        exp: new Date().setDate(new Date().getDate() + 1)       //expiration date is current date +1 day
+    }, JWT_SECRET);
+
+};
 
 module.exports = {
     signUp: async (req, res, next) => {
-        console.log('UserController.signUp() called');
-        const {email, password}  = req.value.body;
+        const {email, password} = req.value.body;
 
-        const  foundUser = await User.findOne({email});
+        //check if user exists
+        const foundUser = await User.findOne({email});
         if (foundUser) {
-           return res.status(403).json({error: ' Email is already in use'})
+            return res.status(403).json({error: ' Email is already in use'})
         }
 
-
-        const newUser = new User({email,password});
+        //create new user
+        const newUser = new User({email, password});
         await newUser.save();
 
-        res.json({user: 'created'});
 
+        //Generate token
+        const token = signToken(newUser);
+
+
+        //respond with token
+        res.status(200).json({token});
     },
+
     signIn: async (req, res, next) => {
-        console.log('UserController.signIn() called');
+
+        const token = signToken(req.user);
+        res.status(200).json({token});
     },
+
     secret: async (req, res, next) => {
-        console.log('UserController.secret() called');
+        console.log('I got here');
+        res.json({secret:"resource"})
     }
 };
