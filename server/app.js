@@ -17,7 +17,7 @@ app.use(bodyParser.json());
 app.use('/users', require('./routes/users'));
 
 //Server set up and initiation
-const port = process.env.PORT || 3000;
-app.listen(port);
-console.log(' Server listening at port ' + port);
-// module.exports = app;
+// const port = process.env.PORT || 3000;
+// app.listen(port);
+// console.log(' Server listening at port ' + port);
+module.exports = app;

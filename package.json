@@ -2,9 +2,10 @@
   "name": "loginnodejs",
   "version": "1.0.0",
   "description": "Login Prototype for NodeJs-MongoDb",
-  "main": "index.js",
+  "main": "server/index.js",
   "scripts": {
-    "start-dev": "nodemon app.js",
+    "server-dev": "nodemon server/index.js",
+    "client-dev": "npm start --prefix client",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "NikosM",
@@ -13,6 +14,7 @@
     "@hapi/joi": "^17.1.1",
     "bcryptjs": "^2.4.3",
     "body-parser": "^1.19.0",
+    "create-react-app": "^3.4.1",
     "express": "^4.17.1",
     "express-promise-router": "^3.0.3",
     "joi": "^14.3.1",
