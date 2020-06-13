@@ -12,8 +12,10 @@
   "license": "ISC",
   "dependencies": {
     "@hapi/joi": "^17.1.1",
+    "axios": "^0.19.2",
     "bcryptjs": "^2.4.3",
     "body-parser": "^1.19.0",
+    "cors": "^2.8.5",
     "create-react-app": "^3.4.1",
     "express": "^4.17.1",
     "express-promise-router": "^3.0.3",

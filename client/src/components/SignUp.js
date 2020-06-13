@@ -1,18 +1,30 @@
 import React, {Component} from 'react';
 import {reduxForm, Field} from 'redux-form'
+import { connect } from 'react-redux';
+import { compose } from 'redux';
 
+import * as actions from '../actions/index'
 import CustomInput from './CustomInput'
 
-export class SignUp extends Component {
-    onSybmit(formData){
+
+class SignUp extends Component {
+    constructor(props){
+        super(props);
+        this.onSubmit = this.onSubmit.bind(this);
+    }
+
+    async onSubmit(formData){
         console.log('formData', formData)
+        //Action Creator
+        await this.props.signUp(formData)
+
     }
     render() {
         const {handleSubmit} = this.props;
         return (
             <div className="row">
                 <div className="col">
-                    <form onSubmit={handleSubmit(this.onSybmit)}>
+                    <form onSubmit={handleSubmit(this.onSubmit)}>
                         <fieldset>
                             <Field
                                 name="email"
@@ -55,4 +67,8 @@ export class SignUp extends Component {
     }
 }
 
-export default reduxForm({form: 'signup'})(SignUp)
+export default compose(
+    connect(null, actions),
+    reduxForm({form: 'signup'})
+)(SignUp)
+
