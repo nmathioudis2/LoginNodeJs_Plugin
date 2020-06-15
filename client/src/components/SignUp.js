@@ -14,9 +14,12 @@ class SignUp extends Component {
     }
 
     async onSubmit(formData){
-        console.log('formData', formData)
+        console.log('formData', formData);
         //Action Creator
-        await this.props.signUp(formData)
+        await this.props.signUp(formData);
+        if(!this.props.errorMessage){
+            this.props.history.push('/dashboard');
+        }
 
     }
     render() {
@@ -43,6 +46,12 @@ class SignUp extends Component {
                                 placeholder="1234"
                                 component={CustomInput}/>
                         </fieldset>
+
+                        { this.props.errorMessage ?
+                            <div className="alert alert-danger">
+                                { this.props.errorMessage }
+                            </div> : null }
+
                         <button type="submit" className='btn btn-primary'> Sign Up</button>
                     </form>
 
@@ -67,8 +76,15 @@ class SignUp extends Component {
     }
 }
 
+function mapStateToProps(state) {
+    return {
+        errorMessage: state.auth.errorMessage
+    }
+}
+
+
 export default compose(
-    connect(null, actions),
+    connect(mapStateToProps, actions),
     reduxForm({form: 'signup'})
 )(SignUp)
 

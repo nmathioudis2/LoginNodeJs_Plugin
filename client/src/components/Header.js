@@ -1,7 +1,21 @@
 import React, {Component} from 'react';
-import { Link } from 'react-router-dom'
+import {Link} from 'react-router-dom';
+import {connect} from 'react-redux';
 
-export default class Header extends Component {
+import * as actions from '../actions';
+
+class Header extends Component {
+    constructor(props) {
+        super(props);
+        this.signOut = this.signOut.bind(this);
+    }
+
+    signOut() {
+        console.log('sign out got called')
+        this.props.signOut();
+    }
+
+
     render() {
         return (
             <div>
@@ -14,15 +28,19 @@ export default class Header extends Component {
                             </li>
                         </ul>
                         <ul className=" nav navbar-nav ml-auto">
+                            {!this.props.isAuth ?
+                                [<li className="nav-item" key="signup">
+                                    <Link className="nav-link" to="/signup"> Sign Up</Link>
+                                </li>,
+                                    <li className="nav-item" key="signin">
+                                        <Link className="nav-link" to="/signin"> Sign In</Link>
+                                    </li>]
+                                : null}
+
+                            {this.props.isAuth ?
                             <li className="nav-item">
-                                <Link className="nav-link" to="/signup"> Sign Up</Link>
-                            </li>
-                            <li className="nav-item">
-                                <Link className="nav-link" to="/signin"> Sign In</Link>
-                            </li>
-                            <li className="nav-item">
-                                <Link className="nav-link" to="/signout"> Sign Out</Link>
-                            </li>
+                                <Link className="nav-link" to="/signout" onClick={this.signOut}> Sign Out</Link>
+                            </li> :null}
                         </ul>
                     </div>
                 </nav>
@@ -30,3 +48,11 @@ export default class Header extends Component {
         );
     }
 }
+
+function mapStateToProps(state) {
+    return {
+        isAuth: state.auth.isAuthenticated
+    }
+}
+
+export default connect(mapStateToProps, actions)(Header);
