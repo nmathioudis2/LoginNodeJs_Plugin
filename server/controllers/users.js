@@ -15,16 +15,22 @@ signToken = (user) => {
 
 module.exports = {
     signUp: async (req, res, next) => {
-        const {email, password} = req.value.body;
+        const {name, surname, email, password, confirmPassword, staff} = req.value.body;
 
         //check if user exists
         const foundUser = await User.findOne({email});
         if (foundUser) {
             return res.status(403).json({error: ' Email is already in use'})
         }
+        if (password!==confirmPassword){
+            return res.status(403).json({error: 'Passwords do not much'})
+        }
+        if (staff==null){
+            return res.status(403).json({error:'Select Staff category'})
+        }
 
         //create new user
-        const newUser = new User({email, password});
+        const newUser = new User({name, surname, email, password,staff});
         await newUser.save();
 
 

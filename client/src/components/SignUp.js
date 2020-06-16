@@ -1,33 +1,57 @@
 import React, {Component} from 'react';
 import {reduxForm, Field} from 'redux-form'
-import { connect } from 'react-redux';
-import { compose } from 'redux';
+import {connect} from 'react-redux';
+import {compose} from 'redux';
 
 import * as actions from '../actions/index'
 import CustomInput from './CustomInput'
 
 
 class SignUp extends Component {
-    constructor(props){
+    constructor(props) {
         super(props);
+
         this.onSubmit = this.onSubmit.bind(this);
     }
 
-    async onSubmit(formData){
+    async onSubmit(formData) {
         console.log('formData', formData);
         //Action Creator
         await this.props.signUp(formData);
-        if(!this.props.errorMessage){
+        if (!this.props.errorMessage) {
             this.props.history.push('/dashboard');
         }
 
     }
+
+
+
+
+
     render() {
         const {handleSubmit} = this.props;
         return (
             <div className="row">
                 <div className="col">
                     <form onSubmit={handleSubmit(this.onSubmit)}>
+                        <fieldset>
+                            <Field
+                                name="name"
+                                type="text"
+                                id="name"
+                                label="Enter staff member first name"
+                                placeholder=""
+                                component={CustomInput}/>
+                        </fieldset>
+                        <fieldset>
+                            <Field
+                                name="surname"
+                                type="text"
+                                id="surname"
+                                label="Enter staff member surname"
+                                placeholder=""
+                                component={CustomInput}/>
+                        </fieldset>
                         <fieldset>
                             <Field
                                 name="email"
@@ -55,12 +79,21 @@ class SignUp extends Component {
                                 placeholder=""
                                 component={CustomInput}/>
                         </fieldset>
+                        <fieldset>
+                            <Field name="staff" component="select">
+                                <option></option>
+                                <option value="Secretary">Secretary</option>
+                                <option value="Doctor">Doctor</option>
+                                <option value="Security">Security</option>
+                                <option value="Nurse">Nurse</option>
+                            </Field>
+                        </fieldset>
 
 
-                        { this.props.errorMessage ?
+                        {this.props.errorMessage ?
                             <div className="alert alert-danger">
-                                { this.props.errorMessage }
-                            </div> : null }
+                                {this.props.errorMessage}
+                            </div> : null}
 
                         <button type="submit" className='btn btn-primary'> Sign Up</button>
                     </form>

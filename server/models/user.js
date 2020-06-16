@@ -4,6 +4,15 @@ const Schema = mongoose.Schema;
 
 //create schema
 const userSchema = new Schema({
+    name: {
+        type: String,
+        required: true,
+
+    },
+    surname: {
+        type: String,
+        required: true
+    },
     email: {
         type: String,
         required: true,
@@ -13,11 +22,18 @@ const userSchema = new Schema({
     password: {
         type: String,
         required: true
+    },
+    staff: {
+      type: String,
+      required: true
     }
 });
 
 userSchema.pre('save', async function (next) {
     try {
+        //Capitalize letters
+        this.name = this.name.charAt(0).toUpperCase() + this.name.slice(1);
+        this.surname = this.surname.charAt(0).toUpperCase() + this.surname.slice(1);
         //Generate a salt
         const salt = await bcrypt.genSalt(10);
         const passwordHash = await bcrypt.hash(this.password, salt);

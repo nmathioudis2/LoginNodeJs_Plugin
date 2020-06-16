@@ -18,9 +18,12 @@ module.exports = {
 
     schemas: {
         authSchema: Joi.object().keys({
+            name: Joi.string().required(),
+            surname: Joi.string().required(),
             email: Joi.string().email().required(),
             password: Joi.string().required(),
-            confirmPassword
+            confirmPassword: Joi.string().required(),
+            staff: Joi.string().required()
         }),
 
         patientSchema: Joi.object().keys({
