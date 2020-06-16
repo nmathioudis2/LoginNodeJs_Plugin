@@ -5,7 +5,7 @@ const mongoose = require('mongoose');
 const cors = require('cors');
 
 mongoose.Promise  = global.Promise;
-mongoose.connect('mongodb://localhost/LoginModule');
+mongoose.connect('mongodb://localhost/Girokomeio');
 
 
 const app = express();
@@ -17,6 +17,7 @@ app.use(bodyParser.json());
 
 //Routes
 app.use('/users', require('./routes/users'));
+app.use('/patient',require('./routes/patient'));
 
 //Server set up and initiation
 // const port = process.env.PORT || 3000;

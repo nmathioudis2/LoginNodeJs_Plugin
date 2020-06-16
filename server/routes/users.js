@@ -7,6 +7,7 @@ const passportConf = require('../passport');
 const {validateBody, schemas} = require('../helpers/routeHelpers');
 const UserController = require('../controllers/users.js');
 
+
 router.route('/signup')
     .post(validateBody(schemas.authSchema),UserController.signUp);
 

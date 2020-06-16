@@ -42,10 +42,20 @@ class SignUp extends Component {
                                 name="password"
                                 type="password"
                                 id="password"
-                                label="Enter your password"
-                                placeholder="1234"
+                                label="Enter password"
+                                placeholder=""
                                 component={CustomInput}/>
                         </fieldset>
+                        <fieldset>
+                            <Field
+                                name="confirmPassword"
+                                type="password"
+                                id="confirmPassword"
+                                label="Validate password"
+                                placeholder=""
+                                component={CustomInput}/>
+                        </fieldset>
+
 
                         { this.props.errorMessage ?
                             <div className="alert alert-danger">
