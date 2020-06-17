@@ -5,17 +5,22 @@ import * as actions from "../actions";
 
 
 class Dashboard extends Component {
+
+
+
     async componentDidMount() {
-        this.props.getSecret()
+        await this.props.getSecret();
     }
 
 
     render() {
         return (
             <div>
-                This is a Dashboard component
+                Welcome!
                 <br/>
-                Our secret: <h3>{this.props.secret}</h3>
+                <h3>{this.props.secret.staff} {this.props.secret.name} {this.props.secret.surname} </h3>
+                <h3>Your email is {this.props.secret.email}</h3>
+
             </div>
         );
     }

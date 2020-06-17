@@ -39,17 +39,17 @@ module.exports = {
 
 
         //respond with token
-        res.status(200).json({token});
+        res.status(200).json({token:token, name: name, surname: surname, staff:staff});
     },
 
     signIn: async (req, res, next) => {
 
         const token = signToken(req.user);
-        res.status(200).json({token});
+        res.status(200).json({token:token});
     },
 
     secret: async (req, res, next) => {
         console.log('I got here');
-        res.json({secret:"resource"})
+        res.json({secret:req.user})
     }
 };

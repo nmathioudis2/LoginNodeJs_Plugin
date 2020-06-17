@@ -25,6 +25,10 @@ module.exports = {
             confirmPassword: Joi.string().required(),
             staff: Joi.string().required()
         }),
+        authSignInSchema: Joi.object().keys({
+            email: Joi.string().email().required(),
+            password: Joi.string().required(),
+        }),
 
         patientSchema: Joi.object().keys({
             name: Joi.string().required(),

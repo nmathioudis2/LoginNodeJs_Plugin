@@ -14,7 +14,12 @@ export const signUp = data => {
                 payload: res.data.token
             });
 
+            localStorage.setItem('NAME', res.data.name);
+            console.log(res.data.name);
+            localStorage.setItem('SURNAME', res.data.surname);
+            localStorage.setItem('STAFF', res.data.staff);
             localStorage.setItem('JWT_TOKEN', res.data.token);
+            axios.defaults.headers.common['Authorization'] = res.data.token;
         } catch (error) {
             dispatch({
                 type: AUTH_ERROR,
@@ -26,6 +31,11 @@ export const signUp = data => {
 
 export const signOut = () => {
     return dispatch => {
+        axios.defaults.headers.common['Authorization'] = "";
+        localStorage.removeItem('JWT_TOKEN');
+        localStorage.removeItem('NAME');
+        localStorage.removeItem('SURNAME');
+        localStorage.removeItem('STAFF');
         localStorage.removeItem('JWT_TOKEN');
         dispatch({
             type: AUTH_SIGN_OUT,
@@ -46,6 +56,11 @@ export const signIn = data => {
             });
 
             localStorage.setItem('JWT_TOKEN', res.data.token);
+            localStorage.setItem('NAME', res.data.name);
+            // console.log(res.data.name);
+            localStorage.setItem('SURNAME', res.data.surname);
+            localStorage.setItem('STAFF', res.data.staff);
+            axios.defaults.headers.common['Authorization'] = res.data.token;
         } catch (error) {
             dispatch({
                 type: AUTH_ERROR,
@@ -63,10 +78,22 @@ export const getSecret = () => {
             dispatch({
                 type: DASHBOARD_GET_DATA,
                 payload: res.data.secret
-            })
-
+            });
+            // localStorage.setItem('NAME', res.data.secret.name);
+            // console.log(res.data.secret.name);
+            // localStorage.setItem('SURNAME', res.data.secret.surname);
+            // console.log(res.data.secret.surname);
+            // localStorage.setItem('STAFF', res.data.secret.staff);
+            // localStorage.setItem('JWT_TOKEN', res.data.token);
         } catch(err) {
             console.error('err', err)
         }
     }
-}
+};
+
+
+
+
+export const saveIamge = () => {
+
+};

@@ -28,6 +28,7 @@ class Header extends Component {
                             </li>
                         </ul>
                         <ul className=" nav navbar-nav ml-auto">
+
                             {!this.props.isAuth ?
                                 [<li className="nav-item" key="signup">
                                     <Link className="nav-link" to="/signup"> Sign Up</Link>
@@ -38,9 +39,16 @@ class Header extends Component {
                                 : null}
 
                             {this.props.isAuth ?
-                            <li className="nav-item">
-                                <Link className="nav-link" to="/signout" onClick={this.signOut}> Sign Out</Link>
-                            </li> :null}
+                                [<li className="nav-item" key="camera">
+                                    <Link className="nav-link" to="/camera"> Camera</Link>
+                                </li>,
+                                    <li className="nav-item" key="patients">
+                                        <Link className="nav-link" to="/patients"> Patients</Link>
+                                    </li>,
+                                    <li className="nav-item" key="signout">
+                                        <Link className="nav-link" to="/signout" onClick={this.signOut}> Sign Out</Link>
+                                    </li>] : null}
+
                         </ul>
                     </div>
                 </nav>
@@ -51,7 +59,8 @@ class Header extends Component {
 
 function mapStateToProps(state) {
     return {
-        isAuth: state.auth.isAuthenticated
+        isAuth: state.auth.isAuthenticated,
+        // isSuper: state.auth.isSupervisor
     }
 }
 
