@@ -3,18 +3,18 @@ const Schema = mongoose.Schema;
 
 //create schema
 const patientSchema = new Schema({
-    name: {
+    patientName: {
         type: String,
         required: true,
         unique: false,
     },
-    surname: {
+    patientSurname: {
         type: String,
         required: true,
         unique: false,
     }
     ,
-    age: {
+    patientAge: {
         type: String,
         required: true
     },

@@ -31,9 +31,9 @@ module.exports = {
         }),
 
         patientSchema: Joi.object().keys({
-            name: Joi.string().required(),
-            surname: Joi.string().required(),
-            age: Joi.number().required(),
+            patientName: Joi.string().required(),
+            patientSurname: Joi.string().required(),
+            patientAge: Joi.number().required(),
             firstEntryDate: Joi.date().format("YYYY/MM/DD").required()
         })
     }

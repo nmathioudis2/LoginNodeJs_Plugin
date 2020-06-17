@@ -1,5 +1,5 @@
 import axios from 'axios';
-import {AUTH_SIGN_UP, AUTH_ERROR, AUTH_SIGN_OUT, AUTH_SIGN_IN,DASHBOARD_GET_DATA} from "./types";
+import {AUTH_SIGN_UP, AUTH_ERROR, AUTH_SIGN_OUT, AUTH_SIGN_IN,DASHBOARD_GET_DATA,PATIENT_SIGN_UP,PATIENT_SIGN_UP_ERROR} from "./types";
 
 
 export const signUp = data => {
@@ -90,6 +90,37 @@ export const getSecret = () => {
         }
     }
 };
+
+
+
+
+//here we create action -> dispatch -> middleware -> reducer
+export const patientSignUp = data => {
+    return async dispatch => {
+        try{
+            const res = await axios.post('http://localhost:5000/patient/signupPatient',data);
+            console.log('res',res);
+
+            dispatch({
+             type: 'PATIENT_SIGN_UP'  ,
+             payload: res.data
+            });
+
+            localStorage.setItem('data',res.data);
+
+
+        }catch (error) {
+            dispatch({
+                type:PATIENT_SIGN_UP_ERROR,
+                payload:'Enter correct data or data format'
+            });
+            console.log('error',error);
+        }
+    }
+
+};
+
+
 
 
 
