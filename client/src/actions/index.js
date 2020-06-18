@@ -1,5 +1,5 @@
 import axios from 'axios';
-import {AUTH_SIGN_UP, AUTH_ERROR, AUTH_SIGN_OUT, AUTH_SIGN_IN,DASHBOARD_GET_DATA,PATIENT_SIGN_UP,PATIENT_SIGN_UP_ERROR} from "./types";
+import {AUTH_SIGN_UP, AUTH_ERROR, AUTH_SIGN_OUT, AUTH_SIGN_IN,DASHBOARD_GET_DATA,PATIENT_SIGN_UP,PATIENT_SIGN_UP_ERROR,PATIENT_GET_LIST} from "./types";
 
 
 export const signUp = data => {
@@ -121,7 +121,26 @@ export const patientSignUp = data => {
 };
 
 
+export const getPatientList = () => {
+    return async dispatch => {
+        try {
+            const res = await axios.get('http://localhost:5000/users/fetchPatientList');
 
+            dispatch({
+                type: PATIENT_GET_LIST,
+                payload: res.data
+            });
+            // localStorage.setItem('NAME', res.data.secret.name);
+            // console.log(res.data.secret.name);
+            // localStorage.setItem('SURNAME', res.data.secret.surname);
+            // console.log(res.data.secret.surname);
+            // localStorage.setItem('STAFF', res.data.secret.staff);
+            // localStorage.setItem('JWT_TOKEN', res.data.token);
+        } catch(err) {
+            console.error('err', err)
+        }
+    }
+};
 
 
 

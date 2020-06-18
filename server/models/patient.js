@@ -21,9 +21,6 @@ const patientSchema = new Schema({
     firstEntryDate: {
         type: Date,
         required: true
-    },
-    events: {
-        event: [{date:Date, description: String}]
     }
 
 });

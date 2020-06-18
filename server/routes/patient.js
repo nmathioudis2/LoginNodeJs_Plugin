@@ -9,6 +9,9 @@ const PatientController = require('../controllers/patient.js');
 router.route('/signupPatient')
     .post(validateBody(schemas.patientSchema),PatientController.signUp);
 
+router.route('/fetchPatientList')
+    .get(PatientController.fetchList);
+
 // router.route('/update')
 //     .post(validateBody(schemas.patientSchema),PatientController.update);
 
