@@ -37,6 +37,7 @@ export const signOut = () => {
         localStorage.removeItem('SURNAME');
         localStorage.removeItem('STAFF');
         localStorage.removeItem('JWT_TOKEN');
+        localStorage.removeItem('PATIENTLIST');
         dispatch({
             type: AUTH_SIGN_OUT,
             payload:''
@@ -124,12 +125,24 @@ export const patientSignUp = data => {
 export const getPatientList = () => {
     return async dispatch => {
         try {
-            const res = await axios.get('http://localhost:5000/users/fetchPatientList');
+            const res = await axios.get('http://localhost:5000/patient/fetchPatientList');
 
             dispatch({
                 type: PATIENT_GET_LIST,
-                payload: res.data
+                payload: res.data.patients
             });
+
+
+            console.log(res.data.patients);
+
+            var test = res.data.patients;
+            console.log('test',test);
+            localStorage.removeItem('PATIENTLIST');
+            localStorage.setItem('PATIENTLIST', JSON.stringify(test));
+            console.log('local',JSON.parse(localStorage.getItem('PATIENTLIST')));
+            var test2=JSON.parse(localStorage.getItem('PATIENTLIST'));
+            console.log('test2',test2);
+
             // localStorage.setItem('NAME', res.data.secret.name);
             // console.log(res.data.secret.name);
             // localStorage.setItem('SURNAME', res.data.secret.surname);

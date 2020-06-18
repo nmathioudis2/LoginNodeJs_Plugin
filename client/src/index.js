@@ -13,8 +13,10 @@ import SignUp from './components/SignUp';
 import SignIn from './components/SignIn';
 import Dashboard from './components/Dashboard'
 import reducers from './reducers/index';
-import Camera from './components/camera'
-import Patients from './components/Patients'
+import Camera from './components/camera';
+import Patients from './components/Patients';
+import PatientData from './components/PatientData';
+
 
 import authGuard from './components/HOCs/authGuard';
 
@@ -37,6 +39,7 @@ ReactDOM.render(
                 <Route exact path="/dashboard" component={authGuard(Dashboard)}/>
                 <Route exact path="/camera" component={authGuard(Camera)}/>
                 <Route exact path="/patients" component={authGuard(Patients)}/>
+                <Route exact path="/patientData" component={authGuard(PatientData)}/>
             </App>
         </BrowserRouter>
     </Provider>,

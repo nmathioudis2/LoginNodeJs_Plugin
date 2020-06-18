@@ -3,7 +3,7 @@ const Patient = require('../models/patient');
 
 module.exports = {
     signUp: async (req, res, next) => {
-        const {patientName, patientSurname, patientAge, firstEntryDate  } = req.value.body;
+        const {patientName, patientSurname, patientAge, firstEntryDate} = req.value.body;
 
         //check if user exists
         const foundPatient = await Patient.findOne({patientSurname});
@@ -20,18 +20,14 @@ module.exports = {
         res.status(200).json({newPatient});
     },
 
-    fetchList:  (req,res, next) => {
+    fetchList: (req, res, next) => {
         console.log('I got to fetchList');
-       Patient.find({},function(err,patients){
-           if(err){
-               res.status(400).json('something went wrong');
-               next();
-           }
-           res.json(patients);
-       });
-
-
+        Patient.find({}, function (err, patients) {
+            if (err) {
+                res.status(400).json('something went wrong');
+                next();
+            }
+            res.json(patients);
+        });
     }
-
-
 };

@@ -5,7 +5,7 @@ import {compose} from 'redux';
 
 import * as actions from '../actions'
 import CustomInput from './CustomInput'
-import CustomTable from "./CustomTable";
+import CustomTablePatientList from "./CustomTablePatientList";
 
 class Patients extends Component {
     //constructor in order to use this. with the onSubmit we created
@@ -35,7 +35,7 @@ class Patients extends Component {
                 <div className="row mt-3">
                     <div className="col">
                         <form>
-                            <CustomTable/>
+                            <CustomTablePatientList/>
                         </form>
                     </div>
                     <div className="col">
