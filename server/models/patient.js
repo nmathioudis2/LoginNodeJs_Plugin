@@ -15,7 +15,7 @@ const patientSchema = new Schema({
     }
     ,
     patientAge: {
-        type: String,
+        type: Number,
         required: true
     },
     firstEntryDate: {

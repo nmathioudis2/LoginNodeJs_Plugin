@@ -2,7 +2,7 @@ import {PATIENT_SIGN_UP,PATIENT_SIGN_UP_ERROR, PATIENT_GET_LIST} from '../action
 
 const DEFAULT_STATE = {
     correctPatientSyntax: false,
-    patientList:'',
+    patients:'',
     errorMessage: ''
 };
 
@@ -16,7 +16,7 @@ export default (state = DEFAULT_STATE, action) => {
             return{ ...state, errorMessage:action.payload};
         case PATIENT_GET_LIST :
             console.log('Lets fetch the list of patients');
-            return {...state,patientList: action.payload};
+            return {...state,patients: action.payload};
         default:
             return state
     }

@@ -137,18 +137,12 @@ export const getPatientList = () => {
 
             var test = res.data.patients;
             console.log('test',test);
-            localStorage.removeItem('PATIENTLIST');
-            localStorage.setItem('PATIENTLIST', JSON.stringify(test));
+            localStorage.setItem('PATIENTLIST', JSON.stringify(res.data.patients));
             console.log('local',JSON.parse(localStorage.getItem('PATIENTLIST')));
             var test2=JSON.parse(localStorage.getItem('PATIENTLIST'));
             console.log('test2',test2);
 
-            // localStorage.setItem('NAME', res.data.secret.name);
-            // console.log(res.data.secret.name);
-            // localStorage.setItem('SURNAME', res.data.secret.surname);
-            // console.log(res.data.secret.surname);
-            // localStorage.setItem('STAFF', res.data.secret.staff);
-            // localStorage.setItem('JWT_TOKEN', res.data.token);
+
         } catch(err) {
             console.error('err', err)
         }

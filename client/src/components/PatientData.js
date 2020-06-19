@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import CustomTable2 from './CustomTablePatientList'
+import CustomTablePatientList from './CustomTablePatientList'
 
 import * as actions from '../actions'
 
@@ -13,7 +13,7 @@ export default class PatientData extends Component {
             <div className="row">
                 <div className="col">
                     <form>
-                        <CustomTable2/>
+                        <CustomTablePatientList/>
                     </form>
                 </div>
 

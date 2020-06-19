@@ -20,14 +20,16 @@ module.exports = {
         res.status(200).json({newPatient});
     },
 
-    fetchList: (req, res, next) => {
+    fetchList:  (req,res, next) => {
         console.log('I got to fetchList');
-        Patient.find({}, function (err, patients) {
-            if (err) {
+        Patient.find({},{patientName:1,patientSurname:1,patientAge:1,firstEntryDate:1,_id:0},function(err,patients){
+            if(err){
                 res.status(400).json('something went wrong');
                 next();
             }
-            res.json(patients);
+            res.json({patients});
         });
+
+
     }
 };

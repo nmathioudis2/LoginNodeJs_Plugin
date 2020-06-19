@@ -14,6 +14,8 @@ class Patients extends Component {
         this.onSubmit = this.onSubmit.bind(this);
     }
 
+
+
     //create custom method onSubmit
     async onSubmit(data) {
         console.log('Submit got called');
@@ -25,6 +27,9 @@ class Patients extends Component {
 
 
     }
+
+
+
 
 
     render() {
