@@ -12,7 +12,7 @@ class CustomTablePatientList extends Component {
         this.state = {
             // patients: JSON.parse(localStorage.getItem('PATIENTLIST'))
             patients:[
-                {patientName: 'John', patientSurname: 'Doe', age: 70, firstEntryDate:'2020/05/17',id:'allalal',somethingelse:'dasdasfa' }
+                {Name: '', urname: '', Age: '' , Registered:'',id:'',somethingelse:'' }
             ]
         };
 
@@ -33,20 +33,20 @@ class CustomTablePatientList extends Component {
         let header = Object.keys(this.state.patients[0]);
 
         return header.map((key, index) => {
-            return <th className="alert alert-primary" key={index}>{key.toUpperCase()}</th>
+            return <th className="alert alert-primary"   key={index}>{key.toUpperCase()}</th>
         })
     }
 
 
     renderTableData() {
         return this.state.patients.map((patient, index) => {
-            const {patientName, patientSurname, age, firstEntryDate} = patient; //destructuring
+            const {Name, Surname, Age, Registered} = patient; //destructuring
             return (
-                <tr key={patientSurname}>
-                    <td>{patientName}</td>
-                    <td>{patientSurname}</td>
-                    <td>{age}</td>
-                    <td>{firstEntryDate}</td>
+                <tr key={Surname}>
+                    <td>{Name}</td>
+                    <td>{Surname}</td>
+                    <td>{Age}</td>
+                    <td>{Registered}</td>
                 </tr>
             )
         })
@@ -57,7 +57,7 @@ class CustomTablePatientList extends Component {
         return (
             <div >
                 <h3 id='title'>Patient list</h3>
-                <table id='patients'>
+                <table className="table" id='patients'>
                     <tbody>
                     <tr>{this.renderTableHeader()}</tr>
                     {this.renderTableData()}

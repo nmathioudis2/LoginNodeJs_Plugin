@@ -35,10 +35,10 @@ module.exports = {
         }),
 
         patientSchema: Joi.object().keys({
-            patientName: Joi.string().required(),
-            patientSurname: Joi.string().required(),
-            patientAge: Joi.number().required(),
-            firstEntryDate: Joi.date().format("YYYY/MM/DD").required()
+            Name: Joi.string().required(),
+            Surname: Joi.string().required(),
+            Age: Joi.string().required(),
+            Registered: Joi.date().format("YYYY/MM/DD").required()
         })
     }
 };

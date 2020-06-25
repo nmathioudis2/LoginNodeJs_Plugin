@@ -1,11 +1,13 @@
 import React, {Component} from 'react';
-import CustomTablePatientList from './CustomTablePatientList'
+import {reduxForm, Field} from 'redux-form'
+import {compose} from "redux";
+import {connect} from "react-redux";
 
+import CustomInputDropdown from './CustomInputDropdown'
 import * as actions from '../actions'
 
-export default class PatientData extends Component {
 
-
+class PatientData extends Component {
 
 
     render() {
@@ -13,12 +15,23 @@ export default class PatientData extends Component {
             <div className="row">
                 <div className="col">
                     <form>
-                        <CustomTablePatientList/>
+                        <fieldset>
+                            <Field
+                                name="Surname"
+                                type="text"
+                                id="Surname"
+                                label="Select Patient"
+                                placeholder=""
+                                component={CustomInputDropdown}/>
+                        </fieldset>
                     </form>
                 </div>
-
-
-
             </div>)
     }
 }
+
+
+export default compose(
+    connect(null, actions),
+    reduxForm({form: 'patientData'})
+)(PatientData)

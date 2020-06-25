@@ -4,6 +4,7 @@ import {connect} from 'react-redux';
 import {saveJobImage} from "../actions/types";
 
 export default class camera extends Component {
+
     state = {
         imageData: null,
         image_name: "",
@@ -49,7 +50,7 @@ export default class camera extends Component {
         e.preventDefault();
         let imageObject = {
             image_name: this.state.image_name,
-            job_id: this.props.job.id,
+            job_id: this.props.job_id,
             image_data: this.state.imageData
         }
         this.props.saveJobImage(imageObject)
@@ -87,7 +88,7 @@ export default class camera extends Component {
                 <Webcam
                     audio={false}
                     height={350}
-                    ref={this.setRef()}
+                    ref={this.setRef}
                     screenshotFormat="image/jpeg"
                     width={350}
                     videoConstraints={videoConstraints}

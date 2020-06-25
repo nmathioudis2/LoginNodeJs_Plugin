@@ -38,11 +38,6 @@ class Patients extends Component {
             <div className="container-fluid">
                 <div className="row mt-3">
                     <div className="col">
-                        <form>
-                            <CustomTablePatientList/>
-                        </form>
-                    </div>
-                    <div className="col">
                         <div className="alert alert-primary">
                             <h3>New Patient</h3>
                             {/*on submit method(left) of the form uses the handlesubmit property of redux form and uses the custom onSubmit method we created*/}

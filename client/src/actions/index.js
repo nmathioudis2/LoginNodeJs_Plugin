@@ -103,7 +103,7 @@ export const patientSignUp = data => {
             console.log('res',res);
 
             dispatch({
-             type: 'PATIENT_SIGN_UP'  ,
+             type: PATIENT_SIGN_UP  ,
              payload: res.data
             });
 
