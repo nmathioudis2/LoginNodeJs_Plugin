@@ -1,4 +1,6 @@
 const Patient = require('../models/patient');
+const patientImg = require('../models/patientImg');
+
 
 
 module.exports = {
@@ -29,7 +31,19 @@ module.exports = {
             }
             res.json({patients});
         });
+    },
 
+    patientAddPhoto: async (req,res,next) => {
+        console.log('lets add the phtoto');
+        console.log('auto einai' + req.value.body);
+        const {image} = req.value.body;
+
+        const newPatientImg = new patientImg({image});
+
+        await newPatientImg.save();
+
+
+        res.status(200).json({newPatientImg});
 
     }
 };

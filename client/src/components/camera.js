@@ -1,9 +1,10 @@
 import React, {Component} from "react";
 import Webcam from "react-webcam";
 import {connect} from 'react-redux';
-import {saveJobImage} from "../actions/types";
+import * as actions from '../actions/index'
+import {compose} from "redux";
 
-export default class camera extends Component {
+class camera extends Component {
 
     state = {
         imageData: null,
@@ -46,15 +47,15 @@ export default class camera extends Component {
         })
     };
 
-    handleSaveSubmit = (e) => {
+    handleSaveSubmit = async (e) => {
         e.preventDefault();
         let imageObject = {
             image_name: this.state.image_name,
             job_id: this.props.job_id,
             image_data: this.state.imageData
-        }
-        this.props.saveJobImage(imageObject)
-    }
+        };
+        await this.props.saveJobImage(imageObject)
+    };
 
 
     saveForm = () => {
@@ -111,5 +112,15 @@ export default class camera extends Component {
 }
 
 
+function mapStateToProps(state) {
+    return {
+        patients: state.patientForm
+    }
+}
+
+
+export default compose(
+    connect(mapStateToProps, actions)
+)(camera)
 
 

@@ -1,5 +1,5 @@
 import axios from 'axios';
-import {AUTH_SIGN_UP, AUTH_ERROR, AUTH_SIGN_OUT, AUTH_SIGN_IN,DASHBOARD_GET_DATA,PATIENT_SIGN_UP,PATIENT_SIGN_UP_ERROR,PATIENT_GET_LIST} from "./types";
+import {AUTH_SIGN_UP, AUTH_ERROR, AUTH_SIGN_OUT, AUTH_SIGN_IN,DASHBOARD_GET_DATA,PATIENT_SIGN_UP,PATIENT_SIGN_UP_ERROR,PATIENT_GET_LIST,SAVE_JOB_IMAGE } from "./types";
 
 
 export const signUp = data => {
@@ -150,7 +150,25 @@ export const getPatientList = () => {
 };
 
 
+export const saveJobImage = data => {
+    return async dispatch => {
+        try {
+            // const res = await axios.post('http://localhost:5000/patient/patientAddPhoto', data);
+            // console.log('res', res);
+            //
+            console.log('eftasa edw')
 
-export const saveIamge = () => {
+            dispatch({
+                type: SAVE_JOB_IMAGE,
+                // payload: res.data
+            });
 
+
+        } catch (error) {
+            dispatch({
+                type: AUTH_ERROR,
+                payload: ' Something went terribly wrong '
+            })
+        }
+    };
 };

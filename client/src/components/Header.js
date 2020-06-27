@@ -42,9 +42,6 @@ class Header extends Component {
                                 [<li className="nav-item" key="camera">
                                     <Link className="nav-link" to="/camera"> Camera</Link>
                                 </li>,
-                                    <li className="nav-item" key="cameraSignUp">
-                                        <Link className="nav-link" to="/patientSignUpData"> Register Patient</Link>
-                                    </li>,
                                     <li className="nav-item" key="patients">
                                         <Link className="nav-link" to="/patients"> Patients</Link>
                                     </li>,
