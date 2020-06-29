@@ -38,7 +38,13 @@ module.exports = {
             Name: Joi.string().required(),
             Surname: Joi.string().required(),
             Age: Joi.string().required(),
-            Registered: Joi.date().format("YYYY/MM/DD").required()
+            Registered: Joi.date().format("YYYY/MM/DD").required(),
+            Image: Joi.optional()
+        }),
+
+        patientImgSchema: Joi.object().keys({
+            surname: Joi.string().required(),
+            imagePath: Joi.string().required()
         })
     }
 };

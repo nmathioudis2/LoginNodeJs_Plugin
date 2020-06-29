@@ -52,10 +52,10 @@ class camera extends Component {
     handleSaveSubmit = async (e) => {
         e.preventDefault();
         let imageObject = {
-            Surname: this.state.image_name,
-            Image: this.state.imageData
+            image_name: this.state.image_name,
+            job_id: this.props.job_id,
+            image_data: this.state.imageData
         };
-        console.log(imageObject);
         await this.props.saveJobImage(imageObject)
     };
 
@@ -95,10 +95,10 @@ class camera extends Component {
                     screenshotFormat="image/jpeg"
                     width={350}
                     videoConstraints={videoConstraints}
-                    />
-                    <div className="button-container">
+                />
+                <div className="button-container">
                     <button onClick={this.capture}>Capture photo</button>
-                    </div>
+                </div>
                 {this.state.imageData ?
                     <div>
                         <p><img src={this.state.imageData} alt="" /></p>

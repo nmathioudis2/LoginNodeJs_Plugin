@@ -39,10 +39,7 @@ class Header extends Component {
                                 : null}
 
                             {this.props.isAuth ?
-                                [<li className="nav-item" key="camera">
-                                    <Link className="nav-link" to="/camera"> Camera</Link>
-                                </li>,
-                                    <li className="nav-item" key="patients">
+                                    [<li className="nav-item" key="patients">
                                         <Link className="nav-link" to="/patients"> Patients</Link>
                                     </li>,
                                     <li className="nav-item" key="patientData">

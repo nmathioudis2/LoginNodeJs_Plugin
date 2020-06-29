@@ -3,7 +3,15 @@ const Schema = mongoose.Schema;
 
 //create schema
 const patientImgSchema = new Schema({
-    image: { data: Buffer, contentType: String }
+    surname: {
+        type: String,
+        required: true
+    },
+    imagePath: {
+        type: String,
+        required: true,
+        unique: false,
+    }
 });
 
 

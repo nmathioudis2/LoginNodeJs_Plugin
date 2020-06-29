@@ -21,6 +21,9 @@ const patientSchema = new Schema({
     Registered: {
         type: Date,
         required: true
+    },
+    Image: {
+        type: Buffer
     }
 
 });

@@ -1,5 +1,6 @@
 import axios from 'axios';
-import {AUTH_SIGN_UP, AUTH_ERROR, AUTH_SIGN_OUT, AUTH_SIGN_IN,DASHBOARD_GET_DATA,PATIENT_SIGN_UP,PATIENT_SIGN_UP_ERROR,PATIENT_GET_LIST,SAVE_JOB_IMAGE } from "./types";
+import {AUTH_SIGN_UP, AUTH_ERROR, AUTH_SIGN_OUT, AUTH_SIGN_IN,DASHBOARD_GET_DATA,PATIENT_SIGN_UP,PATIENT_SIGN_UP_ERROR,PATIENT_GET_LIST,SAVE_JOB_IMAGE, GET_PATIENT_ID } from "./types";
+import React from "react";
 
 
 export const signUp = data => {
@@ -100,14 +101,16 @@ export const patientSignUp = data => {
     return async dispatch => {
         try{
             const res = await axios.post('http://localhost:5000/patient/signupPatient',data);
+
             console.log('res',res);
 
             dispatch({
              type: PATIENT_SIGN_UP  ,
-             payload: res.data
+             payload: res.data.newPatient
             });
 
-            localStorage.setItem('data',res.data);
+            localStorage.setItem('PatientSurname',res.data.newPatient.Surname);
+
 
 
         }catch (error) {
@@ -115,12 +118,38 @@ export const patientSignUp = data => {
                 type:PATIENT_SIGN_UP_ERROR,
                 payload:'Enter correct data or data format'
             });
+            localStorage.removeItem('PatientSurname');
             console.log('error',error);
         }
     }
 
 };
 
+
+// export const takeNewPatientID = data => {
+//     return async dispatch => {
+//         try{
+//             const res = await axios.post('http://localhost:5000/patient/newPatientID',data);
+//             console.log('res',res);
+//
+//             dispatch({
+//                 type: GET_PATIENT_ID  ,
+//                 payload: res.data
+//             });
+//
+//
+//
+//
+//         }catch (error) {
+//             dispatch({
+//                 type:PATIENT_SIGN_UP_ERROR,
+//                 payload:'Enter correct data or data format'
+//             });
+//             console.log('error',error);
+//         }
+//     }
+//
+// };
 
 export const getPatientList = () => {
     return async dispatch => {
@@ -152,15 +181,13 @@ export const getPatientList = () => {
 
 export const saveJobImage = data => {
     return async dispatch => {
+
         try {
-            // const res = await axios.post('http://localhost:5000/patient/patientAddPhoto', data);
-            // console.log('res', res);
-            //
-            console.log('eftasa edw')
+            const res = await axios.post('http://localhost:5000/patient/updatePatient',data );
 
             dispatch({
                 type: SAVE_JOB_IMAGE,
-                // payload: res.data
+                payload: res.data
             });
 
 
