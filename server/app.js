@@ -5,7 +5,7 @@ const mongoose = require('mongoose');
 const cors = require('cors');
 
 mongoose.Promise  = global.Promise;
-mongoose.connect('mongodb://127.0.0.1/Girokomeio');
+mongoose.connect('mongodb://192.168.1.3/Girokomeio');
 
 
 
