@@ -1,12 +1,24 @@
 import axios from 'axios';
-import {AUTH_SIGN_UP, AUTH_ERROR, AUTH_SIGN_OUT, AUTH_SIGN_IN,DASHBOARD_GET_DATA,PATIENT_SIGN_UP,PATIENT_SIGN_UP_ERROR,PATIENT_GET_LIST,SAVE_JOB_IMAGE, GET_PATIENT_ID } from "./types";
+import {
+    AUTH_SIGN_UP,
+    AUTH_ERROR,
+    AUTH_SIGN_OUT,
+    AUTH_SIGN_IN,
+    DASHBOARD_GET_DATA,
+    PATIENT_SIGN_UP,
+    PATIENT_SIGN_UP_ERROR,
+    PATIENT_GET_LIST,
+    SAVE_JOB_IMAGE,
+    GET_PATIENT_ID,
+    GET_PATIENT_DATA
+} from "./types";
 import React from "react";
 
 
 export const signUp = data => {
     return async dispatch => {
         try {
-            const res = await axios.post('http://localhost:5000/users/signup', data);
+            const res = await axios.post('http://192.168.1.3:5000/users/signup', data);
             console.log('res', res);
 
 
@@ -41,7 +53,7 @@ export const signOut = () => {
         localStorage.removeItem('PATIENTLIST');
         dispatch({
             type: AUTH_SIGN_OUT,
-            payload:''
+            payload: ''
         })
     };
 };
@@ -49,7 +61,7 @@ export const signOut = () => {
 export const signIn = data => {
     return async dispatch => {
         try {
-            const res = await axios.post('http://localhost:5000/users/signin', data);
+            const res = await axios.post('http://192.168.1.3:5000/users/signin', data);
             console.log('res', res);
 
             dispatch({
@@ -75,7 +87,7 @@ export const signIn = data => {
 export const getSecret = () => {
     return async dispatch => {
         try {
-            const res = await axios.get('http://localhost:5000/users/secret');
+            const res = await axios.get('http://192.168.1.3:5000/users/secret');
 
             dispatch({
                 type: DASHBOARD_GET_DATA,
@@ -87,39 +99,36 @@ export const getSecret = () => {
             // console.log(res.data.secret.surname);
             // localStorage.setItem('STAFF', res.data.secret.staff);
             // localStorage.setItem('JWT_TOKEN', res.data.token);
-        } catch(err) {
+        } catch (err) {
             console.error('err', err)
         }
     }
 };
 
 
-
-
 //here we create action -> dispatch -> middleware -> reducer
 export const patientSignUp = data => {
     return async dispatch => {
-        try{
-            const res = await axios.post('http://localhost:5000/patient/signupPatient',data);
+        try {
+            const res = await axios.post('http://192.168.1.3:5000/patient/signupPatient', data);
 
-            console.log('res',res);
+            console.log('res', res);
 
             dispatch({
-             type: PATIENT_SIGN_UP  ,
-             payload: res.data.newPatient
+                type: PATIENT_SIGN_UP,
+                payload: res.data.newPatient
             });
 
-            localStorage.setItem('PatientSurname',res.data.newPatient.Surname);
+            localStorage.setItem('PatientSurname', res.data.newPatient.Surname);
 
 
-
-        }catch (error) {
+        } catch (error) {
             dispatch({
-                type:PATIENT_SIGN_UP_ERROR,
-                payload:'Enter correct data or data format'
+                type: PATIENT_SIGN_UP_ERROR,
+                payload: 'Enter correct data or data format'
             });
             localStorage.removeItem('PatientSurname');
-            console.log('error',error);
+            console.log('error', error);
         }
     }
 
@@ -154,7 +163,7 @@ export const patientSignUp = data => {
 export const getPatientList = () => {
     return async dispatch => {
         try {
-            const res = await axios.get('http://localhost:5000/patient/fetchPatientList');
+            const res = await axios.get('http://192.168.1.3:5000/patient/fetchPatientList');
 
             dispatch({
                 type: PATIENT_GET_LIST,
@@ -165,14 +174,14 @@ export const getPatientList = () => {
             console.log(res.data.patients);
 
             var test = res.data.patients;
-            console.log('test',test);
+            console.log('test', test);
             localStorage.setItem('PATIENTLIST', JSON.stringify(res.data.patients));
-            console.log('local',JSON.parse(localStorage.getItem('PATIENTLIST')));
-            var test2=JSON.parse(localStorage.getItem('PATIENTLIST'));
-            console.log('test2',test2);
+            console.log('local', JSON.parse(localStorage.getItem('PATIENTLIST')));
+            var test2 = JSON.parse(localStorage.getItem('PATIENTLIST'));
+            console.log('test2', test2);
 
 
-        } catch(err) {
+        } catch (err) {
             console.error('err', err)
         }
     }
@@ -183,7 +192,7 @@ export const saveJobImage = data => {
     return async dispatch => {
 
         try {
-            const res = await axios.post('http://localhost:5000/patient/updatePatient',data );
+            const res = await axios.post('http://192.168.1.3:5000/patient/updatePatient', data);
 
             dispatch({
                 type: SAVE_JOB_IMAGE,
@@ -198,4 +207,15 @@ export const saveJobImage = data => {
             })
         }
     };
+};
+
+export const fetchPatientData = data => {
+    return async dispatch => {
+        try {
+            console.log('dedomena' + data)
+        } catch (error) {
+
+
+        }
+    }
 };

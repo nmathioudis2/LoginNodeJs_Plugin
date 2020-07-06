@@ -12,7 +12,7 @@ class CustomTablePatientList extends Component {
         this.state = {
             // patients: JSON.parse(localStorage.getItem('PATIENTLIST'))
             patients:[
-                {Name: '', urname: '', Age: '' , Registered:'',id:'',somethingelse:'' }
+                {Name: '', Surname: '', Age: '' , Registered:'',id:'',somethingelse:'' }
             ]
         };
 

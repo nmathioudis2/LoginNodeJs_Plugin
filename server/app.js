@@ -5,7 +5,8 @@ const mongoose = require('mongoose');
 const cors = require('cors');
 
 mongoose.Promise  = global.Promise;
-mongoose.connect('mongodb://localhost/Girokomeio');
+mongoose.connect('mongodb://127.0.0.1/Girokomeio');
+
 
 
 const app = express();

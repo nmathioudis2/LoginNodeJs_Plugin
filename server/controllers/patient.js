@@ -2,6 +2,7 @@ const fs = require('fs');
 
 const Patient = require('../models/patient');
 const patientImg = require('../models/patientImg');
+const patientEvent = require('../models/patientEvent');
 
 
 module.exports = {
@@ -16,9 +17,13 @@ module.exports = {
         }
         //create new user
         const newPatient = new Patient({Name, Surname, Age, Registered , Image});
+        let dateTime = new Date();
+        const newEvent = new patientEvent({surname: Surname, event: 'Registered at' + dateTime.toISOString().slice(0,10), eventDate: dateTime.toISOString().slice(0,10)});
         await newPatient.save();
+        await newEvent.save();
         //respond with newPatient data
         res.status(200).json({newPatient});
+
     },
 
 
