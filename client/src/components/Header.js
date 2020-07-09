@@ -45,8 +45,14 @@ class Header extends Component {
                                     <li className="nav-item" key="patientData">
                                         <Link className="nav-link" to="/patientData">Patient Data</Link>
                                     </li>,
+                                    <li className="nav-item" key="addEvent">
+                                        <Link className="nav-link" to="/addEvent" >Add Activities</Link>
+                                    </li>,
                                     <li className="nav-item" key="patientAddEvent">
-                                        <Link className="nav-link" to="/addevent" >Add Patient Events</Link>
+                                        <Link className="nav-link" to="/addPatientEvent" >Add Patient Events</Link>
+                                    </li>,
+                                    <li className="nav-item" key="rules">
+                                        <Link className="nav-link" to="/rules" >Rules</Link>
                                     </li>,
                                     <li className="nav-item" key="signout">
                                         <Link className="nav-link" to="/signout" onClick={this.signOut}> Sign Out</Link>

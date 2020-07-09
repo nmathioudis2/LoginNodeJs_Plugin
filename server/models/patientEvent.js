@@ -16,6 +16,14 @@ const patientEventSchema = new Schema({
         type: Date,
         required: true
     },
+    StartTime: {
+        type: String,
+        required: true
+    },
+    Duration: {
+        type: String,
+        required: true
+    }
 });
 
 

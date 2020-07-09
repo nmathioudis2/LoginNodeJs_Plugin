@@ -3,84 +3,76 @@ import {compose} from "redux";
 import {connect} from "react-redux";
 import * as actions from "../actions";
 import {Field, reduxForm} from "redux-form";
-import CustomInputDropdown from "./CustomInputDropdown";
 import CustomInput from "./CustomInput";
+import CustomTableActivitiesList from './CustomTableActivitiesList.js'
 
-class AddEvent extends Component {
+class AddPatientEvent extends Component {
     constructor(props) {
         super(props);
         this.onSubmit = this.onSubmit.bind(this);
+        this.state = {
+            showActivities: false.valueOf(),
+        }
     }
 
     async onSubmit(formData) {
-        // await this.props.fetchPatientData(formData)
+        await this.props.addActivity(formData)
 
     }
 
-    _showPatientEvents = (bool, int) => {
+
+
+    _showActivities = (bool) => {
         this.setState({
-            showPatientEvents: bool
+            showActivities: bool
         });
     };
 
+
+
+
     render() {
         const {handleSubmit} = this.props;
-
         return (
-            <div className="row mt-3">
-                <div className="col">
-                    <form onSubmit={handleSubmit(this.onSubmit)}>
-                        <fieldset>
-                            <Field
-                                name="activity"
-                                type="text"
-                                id="activity"
-                                label="Enter an activity"
-                                placeholder=""
-                                component={CustomInput}/>
-                        </fieldset>
-                        <fieldset>
-                            <Field
-                                name="actovityDate"
-                                type="date"
-                                id="date"
-                                label="Enter activity date"
-                                placeholder=""
-                                component={CustomInput}/>
-                        </fieldset>
-                        <fieldset>
-                            <Field
-                                name="actovityStartingTime"
-                                type="hour"
-                                id="sTime"
-                                label="Enter activity's starting time"
-                                placeholder=""
-                                component={CustomInput}/>
-                        </fieldset>
-                        <fieldset>
-                            <Field
-                                name="duration"
-                                type="number"
-                                id="duration"
-                                label="Enter activity's duration(in hours)"
-                                placeholder=""
-                                component={CustomInput}/>
-                        </fieldset>
-                        <fieldset>
-                            <Field
-                                name="Surname"
-                                type="text"
-                                id="Surname"
-                                label="Select Patient"
-                                placeholder=""
-                                component={CustomInputDropdown}/>
-                        </fieldset>
-                        <button type="submit"
-                                className='btn btn-primary'> Show Patient
-                        </button>
-                    </form>
-
+            <div>
+                <div className="row mt-3">
+                    <div className="col">
+                        <form onSubmit={handleSubmit(this.onSubmit)}>
+                            <fieldset>
+                                <Field
+                                    name="Activity"
+                                    type="text"
+                                    id="Activity"
+                                    label="Enter an activity"
+                                    placeholder=""
+                                    component={CustomInput}/>
+                            </fieldset>
+                            <fieldset>
+                                <Field
+                                    name="Coordinator"
+                                    type="text"
+                                    id="Coordinator"
+                                    label="Enter coordinator"
+                                    placeholder=""
+                                    component={CustomInput}/>
+                            </fieldset>
+                            <button type="submit"
+                                    className='btn btn-primary'> Add Activity
+                            </button>
+                            <button onClick={this._showActivities.bind(null, true)}  className='btn btn-primary'>
+                                Show Activities
+                            </button>
+                        </form>
+                    </div>
                 </div>
+                {this.state.showActivities && (
+                <div className="row mt-3">
+                    <div className="col">
+                        <form>
+                            <CustomTableActivitiesList/>
+                        </form>
+                    </div>
+                </div>)}
             </div>
         )
     }
@@ -89,7 +81,7 @@ class AddEvent extends Component {
 
 function mapStateToProps(state) {
     return {
-        patient: state.patientForm.patients
+        activity: state.patientForm.activity
     }
 }
 
@@ -97,5 +89,5 @@ function mapStateToProps(state) {
 export default compose(
     connect(mapStateToProps, actions),
     reduxForm({form: 'getPatient'})
-)(AddEvent)
+)(AddPatientEvent)
 

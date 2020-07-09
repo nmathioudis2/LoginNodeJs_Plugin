@@ -3,6 +3,7 @@ const fs = require('fs');
 const Patient = require('../models/patient');
 const patientImg = require('../models/patientImg');
 const patientEvent = require('../models/patientEvent');
+const activity = require('../models/activities')
 
 
 module.exports = {
@@ -27,7 +28,6 @@ module.exports = {
         await newEvent.save();
         //respond with newPatient data
         res.status(200).json({newPatient});
-
     },
 
 
@@ -87,7 +87,7 @@ module.exports = {
     fetchPatientEvents: async (req, res, next) => {
         const Surname =req.body;
         var query = Surname;
-        patientEvent.find((query), {_id: 0, __v: 0}, function (err, patientevents) {
+        patientEvent.find((query), {_id: 0,Surname:0, __v: 0}, function (err, patientevents) {
             if (err) {
                 res.status(400).json('something went wrong');
                 next();
@@ -97,11 +97,16 @@ module.exports = {
         })
     },
 
+    addPatientEvent: async (req, res, next) => {
+        const {Surname, Event, EventDate, StartTime, Duration} = req.body;
+        const newPatientEvent = new patientEvent({Surname, Event, EventDate, StartTime, Duration});
+        await newPatientEvent.save();
+        res.send()
+    },
+
 
     newPatientID: async (req, res, next) => {
         const {Name, Surname, Age, Registered} = req.value.body;
-
-
         Patient.findOne({Surname}, {Name: 1, Surname: 1, Age: 1., Registered: 1, _id: 1}, function (err, patient) {
             if (err) {
                 res.status(400).json('something went wrong');
@@ -109,9 +114,27 @@ module.exports = {
             }
             res.json({patient});
         });
-
-
-        //respond with token
+                //respond with token
         res.status(200).json({newPatient});
+    },
+
+    addActivity: async (req, res, next) => {
+        const {Activity, Coordinator} = req.body;
+        const newActivity = new activity({Activity, Coordinator});
+        await newActivity.save();
+        res.send()
+    },
+
+
+    fetchActivities: (req, res, next) => {
+        activity.find({}, {_id: 0, __v: 0}, function (err, activities) {
+            if (err) {
+                res.status(400).json('something went wrong');
+                next();
+            }
+            res.json({activities});
+            console.log(activities)
+        });
     }
+
 };

@@ -18,9 +18,10 @@ class PatientData extends Component {
         this.state = {
             showPatientEvents: false.valueOf(),
             events: [
-                {Surname: '', Event: '', EventDate: ''}]
+                {Event: '', EventDate: '', StartTime: '', Duration: ''}]
         }
     }
+
 
     renderTableHeader(req, res, next) {
         let header = Object.keys(this.state.events[0]);
@@ -32,12 +33,13 @@ class PatientData extends Component {
 
     renderTableData() {
         return this.state.events.map((events, index) => {
-            const {Surname, Event, EventDate} = events; //destructuring
+            const {Event, EventDate, StartTime, Duration} = events; //destructuring
             return (
-                <tr key={Surname}>
-                    <td>{Surname}</td>
+                <tr key={Event}>
                     <td>{Event}</td>
                     <td>{EventDate}</td>
+                    <td>{StartTime}</td>
+                    <td>{Duration}</td>
                 </tr>
             )
         })

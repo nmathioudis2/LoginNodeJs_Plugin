@@ -16,7 +16,9 @@ import reducers from './reducers/index';
 import Camera from './components/camera';
 import Patients from './components/Patients';
 import PatientData from './components/PatientData';
+import AddPatientEvent from './components/AddPatientEvent';
 import AddEvent from './components/AddEvent';
+import Rules from './components/Rules'
 
 
 import authGuard from './components/HOCs/authGuard';
@@ -41,7 +43,9 @@ ReactDOM.render(
                 <Route exact path="/camera" component={authGuard(Camera)}/>
                 <Route exact path="/patients" component={authGuard(Patients)}/>
                 <Route exact path="/patientData" component={authGuard(PatientData)}/>
-                <Route exact path="/addevent" component={authGuard(AddEvent)}/>
+                <Route exact path="/addPatientEvent" component={authGuard(AddPatientEvent)}/>
+                <Route exact path="/addEvent" component={authGuard(AddEvent)}/>
+                <Route exact path="/rules" component={authGuard(Rules)}/>
             </App>
         </BrowserRouter>
     </Provider>,

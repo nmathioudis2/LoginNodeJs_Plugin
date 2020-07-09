@@ -1,10 +1,11 @@
-import {PATIENT_SIGN_UP,PATIENT_SIGN_UP_ERROR, PATIENT_GET_LIST, SAVE_JOB_IMAGE, GET_PATIENT_DATA} from '../actions/types'
+import {PATIENT_SIGN_UP,PATIENT_SIGN_UP_ERROR, PATIENT_GET_LIST, SAVE_JOB_IMAGE, GET_PATIENT_DATA, ADD_PATIENT_EVENT, ADD_ACTIVITY, GET_ACTIVITY} from '../actions/types'
 
 const DEFAULT_STATE = {
     correctPatientSyntax: false,
     patients:'',
     errorMessage: '',
-    events:''
+    events:'',
+    activity: ''
 };
 
 export default (state = DEFAULT_STATE, action) => {
@@ -23,6 +24,12 @@ export default (state = DEFAULT_STATE, action) => {
             return {...state};
         case GET_PATIENT_DATA:
             return {...state, events:action.payload};
+        case ADD_PATIENT_EVENT:
+            return {...state, events:action.payload};
+        case ADD_ACTIVITY:
+            return {...state, events:action.payload};
+        case GET_ACTIVITY:
+            return {...state, activity:action.payload};
         default:
             return state
     }

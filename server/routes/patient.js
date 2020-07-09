@@ -38,6 +38,15 @@ router.route('/updatePatient')
 router.route('/fetchPatientEvents')
     .post(PatientController.fetchPatientEvents);
 
+router.route('/addPatientEvent')
+    .post(PatientController.addPatientEvent);
+
+router.route('/addActivity')
+    .post(PatientController.addActivity);
+
+router.route('/fetchActivities')
+    .get(PatientController.fetchActivities);
+
 
 
 module.exports = router;

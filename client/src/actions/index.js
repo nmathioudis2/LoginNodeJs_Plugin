@@ -10,7 +10,10 @@ import {
     PATIENT_GET_LIST,
     SAVE_JOB_IMAGE,
     GET_PATIENT_ID,
-    GET_PATIENT_DATA
+    GET_PATIENT_DATA,
+    ADD_PATIENT_EVENT,
+    ADD_ACTIVITY,
+    GET_ACTIVITY
 } from "./types";
 import React from "react";
 
@@ -93,12 +96,6 @@ export const getSecret = () => {
                 type: DASHBOARD_GET_DATA,
                 payload: res.data.secret
             });
-            // localStorage.setItem('NAME', res.data.secret.name);
-            // console.log(res.data.secret.name);
-            // localStorage.setItem('SURNAME', res.data.secret.surname);
-            // console.log(res.data.secret.surname);
-            // localStorage.setItem('STAFF', res.data.secret.staff);
-            // localStorage.setItem('JWT_TOKEN', res.data.token);
         } catch (err) {
             console.error('err', err)
         }
@@ -135,30 +132,6 @@ export const patientSignUp = data => {
 };
 
 
-// export const takeNewPatientID = data => {
-//     return async dispatch => {
-//         try{
-//             const res = await axios.post('http://localhost:5000/patient/newPatientID',data);
-//             console.log('res',res);
-//
-//             dispatch({
-//                 type: GET_PATIENT_ID  ,
-//                 payload: res.data
-//             });
-//
-//
-//
-//
-//         }catch (error) {
-//             dispatch({
-//                 type:PATIENT_SIGN_UP_ERROR,
-//                 payload:'Enter correct data or data format'
-//             });
-//             console.log('error',error);
-//         }
-//     }
-//
-// };
 
 export const getPatientList = () => {
     return async dispatch => {
@@ -220,6 +193,73 @@ export const fetchPatientData = data => {
                 type: GET_PATIENT_DATA,
                 payload: res.data
             });
+        } catch (error) {
+            dispatch({
+                type: AUTH_ERROR,
+                payload: ' Something went terribly wrong '
+            })
+
+        }
+    }
+};
+
+
+export const addPatientEvent = data => {
+    return async dispatch => {
+        try {
+            console.log(data)
+            const res = await axios.post('http://localhost:5000/patient/addPatientEvent', data)
+
+
+            dispatch({
+                type: ADD_PATIENT_EVENT,
+                payload: res.data
+            });
+
+        } catch (error) {
+            dispatch({
+                type: AUTH_ERROR,
+                payload: ' Something went terribly wrong '
+            })
+
+        }
+    }
+};
+
+export const addActivity = data => {
+    return async dispatch => {
+        try {
+
+            const res = await axios.post('http://localhost:5000/patient/addActivity', data)
+
+
+            dispatch({
+                type: ADD_ACTIVITY,
+                payload: res.data
+            });
+
+        } catch (error) {
+            dispatch({
+                type: AUTH_ERROR,
+                payload: ' Something went terribly wrong '
+            })
+
+        }
+    }
+};
+
+export const fetchActivity = () => {
+    return async dispatch => {
+        try {
+
+            const res = await axios.get('http://localhost:5000/patient/fetchActivities');
+            console.log(res.data.activities);
+
+            dispatch({
+                type: GET_ACTIVITY,
+                payload: res.data.activities
+            });
+
         } catch (error) {
             dispatch({
                 type: AUTH_ERROR,
