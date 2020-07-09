@@ -61,7 +61,7 @@ export const signOut = () => {
 export const signIn = data => {
     return async dispatch => {
         try {
-            const res = await axios.post('http://192.168.1.3:5000/users/signin', data);
+            const res = await axios.post('http://localhost:5000/users/signin', data);
             console.log('res', res);
 
             dispatch({
@@ -87,7 +87,7 @@ export const signIn = data => {
 export const getSecret = () => {
     return async dispatch => {
         try {
-            const res = await axios.get('http://192.168.1.3:5000/users/secret');
+            const res = await axios.get('http://localhost:5000/users/secret');
 
             dispatch({
                 type: DASHBOARD_GET_DATA,
@@ -110,7 +110,7 @@ export const getSecret = () => {
 export const patientSignUp = data => {
     return async dispatch => {
         try {
-            const res = await axios.post('http://192.168.1.3:5000/patient/signupPatient', data);
+            const res = await axios.post('http://localhost:5000/patient/signupPatient', data);
 
             console.log('res', res);
 
@@ -163,7 +163,7 @@ export const patientSignUp = data => {
 export const getPatientList = () => {
     return async dispatch => {
         try {
-            const res = await axios.get('http://192.168.1.3:5000/patient/fetchPatientList');
+            const res = await axios.get('http://localhost:5000/patient/fetchPatientList');
 
             dispatch({
                 type: PATIENT_GET_LIST,
@@ -172,13 +172,13 @@ export const getPatientList = () => {
 
 
             console.log(res.data.patients);
-
-            var test = res.data.patients;
-            console.log('test', test);
             localStorage.setItem('PATIENTLIST', JSON.stringify(res.data.patients));
-            console.log('local', JSON.parse(localStorage.getItem('PATIENTLIST')));
-            var test2 = JSON.parse(localStorage.getItem('PATIENTLIST'));
-            console.log('test2', test2);
+
+            // var test = res.data.patients;
+            // console.log('test', test);
+            // console.log('local', JSON.parse(localStorage.getItem('PATIENTLIST')));
+            // var test2 = JSON.parse(localStorage.getItem('PATIENTLIST'));
+            // console.log('test2', test2);
 
 
         } catch (err) {
@@ -192,7 +192,7 @@ export const saveJobImage = data => {
     return async dispatch => {
 
         try {
-            const res = await axios.post('http://192.168.1.3:5000/patient/updatePatient', data);
+            const res = await axios.post('http://localhost:5000/patient/updatePatient', data);
 
             dispatch({
                 type: SAVE_JOB_IMAGE,
@@ -212,9 +212,19 @@ export const saveJobImage = data => {
 export const fetchPatientData = data => {
     return async dispatch => {
         try {
-            console.log('dedomena' + data)
-        } catch (error) {
+            const res = await axios.post('http://localhost:5000/patient/fetchPatientEvents', data)
 
+            console.log(res.data[0])
+
+            dispatch({
+                type: GET_PATIENT_DATA,
+                payload: res.data
+            });
+        } catch (error) {
+            dispatch({
+                type: AUTH_ERROR,
+                payload: ' Something went terribly wrong '
+            })
 
         }
     }

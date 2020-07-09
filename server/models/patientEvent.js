@@ -3,16 +3,16 @@ const Schema = mongoose.Schema;
 
 //create schema
 const patientEventSchema = new Schema({
-    surname: {
+    Surname: {
         type: String,
         required: true
     },
-    event: {
+    Event: {
         type: String,
         required: true,
         unique: false,
     },
-    eventDate: {
+    EventDate: {
         type: Date,
         required: true
     },

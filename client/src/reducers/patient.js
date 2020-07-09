@@ -1,9 +1,10 @@
-import {PATIENT_SIGN_UP,PATIENT_SIGN_UP_ERROR, PATIENT_GET_LIST, SAVE_JOB_IMAGE} from '../actions/types'
+import {PATIENT_SIGN_UP,PATIENT_SIGN_UP_ERROR, PATIENT_GET_LIST, SAVE_JOB_IMAGE, GET_PATIENT_DATA} from '../actions/types'
 
 const DEFAULT_STATE = {
     correctPatientSyntax: false,
     patients:'',
-    errorMessage: ''
+    errorMessage: '',
+    events:''
 };
 
 export default (state = DEFAULT_STATE, action) => {
@@ -20,6 +21,8 @@ export default (state = DEFAULT_STATE, action) => {
         case SAVE_JOB_IMAGE:
             console.log("saving patient's image");
             return {...state};
+        case GET_PATIENT_DATA:
+            return {...state, events:action.payload};
         default:
             return state
     }

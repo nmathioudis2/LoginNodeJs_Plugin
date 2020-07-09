@@ -17,8 +17,8 @@ class CustomInputDropdown extends Component {
 
     async componentWillMount() {
         await this.props.getPatientList();
-        console.log('eimai sto will')
-        this.setState({patients: JSON.parse(localStorage.getItem('PATIENTLIST'))})
+        // console.log('eimai sto will');
+        this.setState({patients: JSON.parse(localStorage.getItem('PATIENTLIST'))});
         localStorage.removeItem('PATIENTLIST')
 
     }

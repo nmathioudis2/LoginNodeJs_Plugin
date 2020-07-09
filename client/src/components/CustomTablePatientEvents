@@ -11,8 +11,8 @@ class CustomTablePatientList extends Component {
         super(props);
         this.state = {
             // patients: JSON.parse(localStorage.getItem('PATIENTLIST'))
-            patients:[
-                {Name: '', Surname: '', Age: '' , Registered:'',id:'',somethingelse:'' }
+            events:[
+                {surname: '', event: '',eventDate: '' }
             ]
         };
 
@@ -20,17 +20,15 @@ class CustomTablePatientList extends Component {
 
 
     async componentWillMount() {
-        await this.props.getPatientList();
-        // this.state = {
-        // patients: JSON.parse(localStorage.getItem('PATIENTLIST'))
-        this.setState({patients: JSON.parse(localStorage.getItem('PATIENTLIST'))})
+        this.setState({events: JSON.parse(localStorage.getItem('PATIENTEVENTS'))})
+        localStorage.removeItem('PATIENTEVENTS')
     };
 
 
     renderTableHeader(req,res,next) {
 
 
-        let header = Object.keys(this.state.patients[0]);
+        let header = Object.keys(this.state.events[0]);
 
         return header.map((key, index) => {
             return <th className="alert alert-primary"   key={index}>{key.toUpperCase()}</th>
@@ -39,14 +37,13 @@ class CustomTablePatientList extends Component {
 
 
     renderTableData() {
-        return this.state.patients.map((patient, index) => {
-            const {Name, Surname, Age, Registered} = patient; //destructuring
+        return this.state.events.map((events, index) => {
+            const {surname, event, eventDate} = events; //destructuring
             return (
-                <tr key={Surname}>
-                    <td>{Name}</td>
-                    <td>{Surname}</td>
-                    <td>{Age}</td>
-                    <td>{Registered}</td>
+                <tr key={surname}>
+                    <td>{surname}</td>
+                    <td>{event}</td>
+                    <td>{eventDate}</td>
                 </tr>
             )
         })
@@ -56,8 +53,8 @@ class CustomTablePatientList extends Component {
     render() {
         return (
             <div >
-                <h3 id='title'>Patient list</h3>
-                <table className="table" id='patients'>
+                <h3 id='title'>Latest Events</h3>
+                <table className="table" id='events'>
                     <tbody>
                     <tr>{this.renderTableHeader()}</tr>
                     {this.renderTableData()}
@@ -71,10 +68,10 @@ class CustomTablePatientList extends Component {
 
 function mapStateToProps(state) {
     return {
-        patients: state.patientForm.patients
+        events: state.patientForm.events
     }
 }
 
 export default compose(
     connect(mapStateToProps, actions)
-)(CustomTablePatientList)
+)(CustomTablePatientEvents)

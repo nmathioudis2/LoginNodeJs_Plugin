@@ -6,7 +6,9 @@ import {connect} from "react-redux";
 
 import CustomInputDropdown from './CustomInputDropdown'
 import * as actions from '../actions'
-import CustomTablePatientList from "./CustomTablePatientList";
+import {Link} from "react-router-dom";
+// import CustomTablePatientList from "./CustomTablePatientList";
+// import CustomTablePatientEvents from "./CustomTablePatientEvents";
 
 
 class PatientData extends Component {
@@ -14,9 +16,33 @@ class PatientData extends Component {
         super(props);
         this.onSubmit = this.onSubmit.bind(this);
         this.state = {
-            showPatientEvents: false
+            showPatientEvents: false.valueOf(),
+            events: [
+                {Surname: '', Event: '', EventDate: ''}]
         }
     }
+
+    renderTableHeader(req, res, next) {
+        let header = Object.keys(this.state.events[0]);
+
+        return header.map((key, index) => {
+            return <th className="alert alert-primary" key={index}>{key.toUpperCase()}</th>
+        })
+    }
+
+    renderTableData() {
+        return this.state.events.map((events, index) => {
+            const {Surname, Event, EventDate} = events; //destructuring
+            return (
+                <tr key={Surname}>
+                    <td>{Surname}</td>
+                    <td>{Event}</td>
+                    <td>{EventDate}</td>
+                </tr>
+            )
+        })
+    }
+
 
     _showPatientEvents = (bool) => {
         this.setState({
@@ -25,9 +51,11 @@ class PatientData extends Component {
     };
 
     async onSubmit(formData) {
-        console.log('formData', formData);
         await this.props.fetchPatientData(formData)
+        this.setState({events: this.props.events})
     }
+
+
 
 
     render() {
@@ -46,18 +74,30 @@ class PatientData extends Component {
                                     placeholder=""
                                     component={CustomInputDropdown}/>
                             </fieldset>
-                            <button onClick={this._showPatientEvents.bind(null, true)} type="submit"
+                            <button onClick={this._showPatientEvents.bind(null, true)}  type="submit"
                                     className='btn btn-primary'> Show Patient
                             </button>
-                            <button onClick={this._showPatientEvents.bind(null, false)} type="submit"
-                                    className='btn btn-primary'> Show
-                            </button>
+                            {/*<button onClick={this._showPatientEvents.bind(null, false)} type="submit"*/}
+                            {/*        className='btn btn-primary'> Show*/}
+                            {/*</button>*/}
                         </form>
                     </div>
                 </div>
                 <div className="row ">
                     <div className='col'>
-                        {this.state.showPatientEvents && (<CustomTablePatientList/>)}
+                        {this.state.showPatientEvents && (
+                            <div>
+                                <h3 id='title'>Latest Events</h3>
+                                <table className="table" id='events'>
+                                    <tbody>
+                                    <tr>{this.renderTableHeader()}</tr>
+                                    {this.renderTableData()}
+                                    </tbody>
+                                </table>
+                                <Link to="/addevent"><button className='btn btn-primary'>
+                                    Add Event</button></Link>
+                            </div>)}
+                        {console.log(this.state.events)}
                     </div>
                 </div>
             </div>
@@ -68,7 +108,8 @@ class PatientData extends Component {
 
 function mapStateToProps(state) {
     return {
-        patient: state.patientForm.patients
+        patient: state.patientForm.patients,
+        events: state.patientForm.events
     }
 }
 

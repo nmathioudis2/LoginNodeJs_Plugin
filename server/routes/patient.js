@@ -23,9 +23,6 @@ const PatientController = require('../controllers/patient.js');
 router.route('/signupPatient')
     .post(validateBody(schemas.patientSchema), PatientController.signUp);
 
-// router.route('/signupPatient')
-//     .get(PatientController.getNewPatientData);
-
 router.route('/fetchPatientList')
     .get(PatientController.fetchList);
 
@@ -38,13 +35,9 @@ router.route('/patientAddPhotoToDb')
 router.route('/updatePatient')
     .post(upload.single('upload'), PatientController.updatePatient);
 
+router.route('/fetchPatientEvents')
+    .post(PatientController.fetchPatientEvents);
 
-// router.route('/newPatientID/:surname')
-//     .get(PatientController.newPatientID);
-
-
-// router.route('/update')
-//     .post(validateBody(schemas.patientSchema),PatientController.update);
 
 
 module.exports = router;
