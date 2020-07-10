@@ -12,3 +12,5 @@ export const GET_PATIENT_DATA = 'GET_PATIENT_DATA';
 export const ADD_PATIENT_EVENT = 'ADD_PATIENT_EVENT';
 export const ADD_ACTIVITY = 'ADD_ACTIVITY';
 export const GET_ACTIVITY = 'GET_ACTIVITY';
+export const UPDATE_RULES= 'UPDATE_RULES';
+export const RULES_ERROR = 'RULES_ERROR';

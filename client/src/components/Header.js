@@ -30,29 +30,34 @@ class Header extends Component {
                         <ul className=" nav navbar-nav ml-auto">
 
                             {!this.props.isAuth ?
-                                [<li className="nav-item" key="signup">
-                                    <Link className="nav-link" to="/signup"> Sign Up</Link>
-                                </li>,
+                                [
                                     <li className="nav-item" key="signin">
                                         <Link className="nav-link" to="/signin"> Sign In</Link>
                                     </li>]
                                 : null}
 
                             {this.props.isAuth ?
-                                [<li className="nav-item" key="patients">
-                                    <Link className="nav-link" to="/patients"> Patients</Link>
+                                [<li className="nav-item" key="statistics">
+                                    <Link className="nav-link" to="/statistics"> Statistics</Link>
                                 </li>,
+
+                                    <li className="nav-item" key="patients">
+                                        <Link className="nav-link" to="/patients"> Patients</Link>
+                                    </li>,
                                     <li className="nav-item" key="patientData">
-                                        <Link className="nav-link" to="/patientData">Patient Data</Link>
+                                        <Link className="nav-link" to="/patientData">Patient Info</Link>
                                     </li>,
                                     <li className="nav-item" key="addEvent">
-                                        <Link className="nav-link" to="/addEvent" >Add Activities</Link>
+                                        <Link className="nav-link" to="/addEvent">Add Activities</Link>
                                     </li>,
                                     <li className="nav-item" key="patientAddEvent">
-                                        <Link className="nav-link" to="/addPatientEvent" >Add Patient Events</Link>
+                                        <Link className="nav-link" to="/addPatientEvent">Add Patient Activities</Link>
                                     </li>,
                                     <li className="nav-item" key="rules">
-                                        <Link className="nav-link" to="/rules" >Rules</Link>
+                                        <Link className="nav-link" to="/rules">Rules</Link>
+                                    </li>,
+                                    <li className="nav-item" key="signup">
+                                        <Link className="nav-link" to="/signup"> Sign Up</Link>
                                     </li>,
                                     <li className="nav-item" key="signout">
                                         <Link className="nav-link" to="/signout" onClick={this.signOut}> Sign Out</Link>
@@ -70,7 +75,7 @@ class Header extends Component {
 function mapStateToProps(state) {
     return {
         isAuth: state.auth.isAuthenticated,
-        // isSuper: state.auth.isSupervisor
+        secret: state.dash.secret
     }
 }
 

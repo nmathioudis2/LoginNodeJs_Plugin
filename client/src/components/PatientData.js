@@ -77,7 +77,7 @@ class PatientData extends Component {
                                     component={CustomInputDropdown}/>
                             </fieldset>
                             <button onClick={this._showPatientEvents.bind(null, true)}  type="submit"
-                                    className='btn btn-primary'> Show Patient
+                                    className='btn btn-primary'> Show Patient Schedule
                             </button>
                             {/*<button onClick={this._showPatientEvents.bind(null, false)} type="submit"*/}
                             {/*        className='btn btn-primary'> Show*/}
@@ -89,7 +89,7 @@ class PatientData extends Component {
                     <div className='col'>
                         {this.state.showPatientEvents && (
                             <div>
-                                <h3 id='title'>Latest Events</h3>
+                                <h3 id='title'>Patient's Schedule</h3>
                                 <table className="table" id='events'>
                                     <tbody>
                                     <tr>{this.renderTableHeader()}</tr>
@@ -97,7 +97,7 @@ class PatientData extends Component {
                                     </tbody>
                                 </table>
                                 <Link to="/addevent"><button className='btn btn-primary'>
-                                    Add Event</button></Link>
+                                    Schedule a new event</button></Link>
                             </div>)}
                         {console.log(this.state.events)}
                     </div>

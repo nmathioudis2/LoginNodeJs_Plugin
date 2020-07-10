@@ -19,6 +19,7 @@ app.use(bodyParser.json());
 //Routes
 app.use('/users', require('./routes/users'));
 app.use('/patient',require('./routes/patient'));
+app.use('/rules',require('./routes/rules'));
 
 //Server set up and initiation
 // const port = process.env.PORT || 3000;

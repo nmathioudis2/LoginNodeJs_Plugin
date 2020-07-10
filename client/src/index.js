@@ -18,10 +18,15 @@ import Patients from './components/Patients';
 import PatientData from './components/PatientData';
 import AddPatientEvent from './components/AddPatientEvent';
 import AddEvent from './components/AddEvent';
-import Rules from './components/Rules'
+import Rules from './components/Rules';
+import Statistics from './components/Statistics';
+import Chart from './components/Chart';
 
 
 import authGuard from './components/HOCs/authGuard';
+import authGuardAdmin from './components/HOCs/AuthGuardAdmin';
+import authGuardSecretary from './components/HOCs/AuthGuardSecretary';
+import AuthGuardSecurity from './components/HOCs/AuthGuardSecurity';
 
 const jwtToken =localStorage.getItem('JWT_TOKEN');
 console.log(jwtToken);
@@ -38,14 +43,15 @@ ReactDOM.render(
             <App>
                 <Route exact path="/" component={Home}/>
                 <Route exact path="/signin" component={SignIn}/>
-                <Route exact path="/signup" component={SignUp}/>
+                <Route exact path="/signup" component={authGuardAdmin(SignUp)}/>
                 <Route exact path="/dashboard" component={authGuard(Dashboard)}/>
                 <Route exact path="/camera" component={authGuard(Camera)}/>
-                <Route exact path="/patients" component={authGuard(Patients)}/>
+                <Route exact path="/patients" component={authGuardSecretary(Patients)}/>
                 <Route exact path="/patientData" component={authGuard(PatientData)}/>
                 <Route exact path="/addPatientEvent" component={authGuard(AddPatientEvent)}/>
                 <Route exact path="/addEvent" component={authGuard(AddEvent)}/>
-                <Route exact path="/rules" component={authGuard(Rules)}/>
+                <Route exact path="/rules" component={AuthGuardSecurity(Rules)}/>
+                <Route exact path="/statistics" component={AuthGuardSecurity(Statistics)}/>
             </App>
         </BrowserRouter>
     </Provider>,

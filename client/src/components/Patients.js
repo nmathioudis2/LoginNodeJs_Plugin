@@ -23,7 +23,6 @@ class Patients extends Component {
         //Here we call the patientSignUp and assign it to properties of Component(since action has async methods it should also be here async
         //IMPORTANT in order TO USE THIS PROPERTY IN the async onSubmit which we created(and so the patientSignUp)  we first need to bind it. we create the constructor above
         await this.props.patientSignUp(data);
-        // console.log('to eponumo einai '+localStorage.getItem('PatientSurname'));
 
 
         if (!this.props.errorMessage) {

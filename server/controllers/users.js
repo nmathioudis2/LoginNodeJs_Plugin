@@ -16,6 +16,7 @@ signToken = (user) => {
 module.exports = {
     signUp: async (req, res, next) => {
         const {name, surname, email, password, confirmPassword, staff} = req.value.body;
+        console.log(email);
 
         //check if user exists
         const foundUser = await User.findOne({email});
