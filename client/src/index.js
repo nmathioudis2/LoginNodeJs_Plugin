@@ -51,7 +51,8 @@ ReactDOM.render(
                 <Route exact path="/addPatientEvent" component={authGuard(AddPatientEvent)}/>
                 <Route exact path="/addEvent" component={authGuard(AddEvent)}/>
                 <Route exact path="/rules" component={AuthGuardSecurity(Rules)}/>
-                <Route exact path="/statistics" component={AuthGuardSecurity(Statistics)}/>
+                <Route exact path="/statistics" component={authGuard(Statistics)}/>
+                <Route exact path="/charts" component={authGuard(Chart)}/>
             </App>
         </BrowserRouter>
     </Provider>,

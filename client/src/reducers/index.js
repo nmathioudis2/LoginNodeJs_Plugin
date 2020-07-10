@@ -4,11 +4,13 @@ import authReducer from './auth';
 import dashboardReducer from './dashboard';
 import patientReducer from './patient';
 import rulesReducer from './rules'
+import chartsReducer from './charts'
 
 export default combineReducers({
     form: formReducer,
     auth: authReducer,
     dash: dashboardReducer,
     patientForm: patientReducer,
-    rulesForm: rulesReducer
+    rulesForm: rulesReducer,
+    chartsForm: chartsReducer
 });

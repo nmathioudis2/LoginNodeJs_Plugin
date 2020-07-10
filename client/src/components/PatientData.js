@@ -52,7 +52,7 @@ class PatientData extends Component {
         });
     };
 
-    async onSubmit(formData) {
+      async onSubmit(formData) {
         await this.props.fetchPatientData(formData)
         this.setState({events: this.props.events})
     }

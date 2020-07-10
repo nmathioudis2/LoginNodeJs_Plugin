@@ -20,6 +20,7 @@ app.use(bodyParser.json());
 app.use('/users', require('./routes/users'));
 app.use('/patient',require('./routes/patient'));
 app.use('/rules',require('./routes/rules'));
+app.use('/charts',require('./routes/charts'));
 
 //Server set up and initiation
 // const port = process.env.PORT || 3000;

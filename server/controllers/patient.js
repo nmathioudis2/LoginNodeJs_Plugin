@@ -86,7 +86,7 @@ module.exports = {
 
     fetchPatientEvents: async (req, res, next) => {
         const Surname =req.body;
-        var query = Surname;
+        let query = Surname;
         patientEvent.find((query), {_id: 0,Surname:0, __v: 0}, function (err, patientevents) {
             if (err) {
                 res.status(400).json('something went wrong');

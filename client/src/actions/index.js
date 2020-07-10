@@ -15,7 +15,9 @@ import {
     ADD_ACTIVITY,
     GET_ACTIVITY,
     UPDATE_RULES,
-    RULES_ERROR
+    RULES_ERROR,
+    POST_CHART,
+    CHARTS_ERROR
 } from "./types";
 import React from "react";
 
@@ -244,6 +246,33 @@ export const addRules = data => {
         } catch (error) {
             dispatch({
                 type: RULES_ERROR,
+                payload: ' You must select between active and inactive'
+            })
+
+        }
+    }
+};
+
+export const fetchLocationPreferences = data => {
+    return async dispatch => {
+        try {
+            // console.log(data);
+            const res = await axios.post('http://localhost:5000/charts/pieChartLocationPreference', data);
+
+            // console.log(res);
+            // console.log(res.data.patientCameraPrefs);
+            let {Camera0, Camera1} = res.data.patientCameraPrefs[0];
+            let resData = [parseInt(Camera0,10), parseInt(Camera1,10)];
+            // console.log(resData);
+            // console.log('camera0 ' + Camera0);
+            // console.log('camera1 ' + Camera1);
+            dispatch({
+                type: POST_CHART,
+                payload: resData
+            });
+        } catch (error) {
+            dispatch({
+                type: CHARTS_ERROR,
                 payload: ' You must select between active and inactive'
             })
 
