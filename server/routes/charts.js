@@ -6,4 +6,7 @@ const ChartsController = require('../controllers/charts');
 router.route('/pieChartLocationPreference')
     .post(ChartsController.pieChartLocPref);
 
+router.route('/lineTimeDiagram')
+    .post(ChartsController.lineTimeDiagram);
+
 module.exports = router;

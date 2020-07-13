@@ -81,9 +81,9 @@ class Patients extends Component {
                                 <fieldset>
                                     <Field
                                         name="Registered"
-                                        type="text"
+                                        type="Date"
                                         id="Registered"
-                                        label="Patient's registration date (YYYY/MM/DD)"
+                                        label="Patient's registration date "
                                         placeholder=""
                                         component={CustomInput}/>
                                 </fieldset>

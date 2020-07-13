@@ -46,7 +46,7 @@ class CustomTablePatientList extends Component {
                     <td>{Name}</td>
                     <td>{Surname}</td>
                     <td>{Age}</td>
-                    <td>{Registered}</td>
+                    <td>{Registered.slice(0,10)}</td>
                 </tr>
             )
         })

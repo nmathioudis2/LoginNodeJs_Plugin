@@ -49,6 +49,7 @@ class Charts extends Component {
                         }
                     }}
 
+
                 />
             </div>
         )

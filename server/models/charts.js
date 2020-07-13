@@ -17,6 +17,8 @@ const pieChartsSchema = new Schema({
 
 });
 
+
 const pieChart = mongoose.model('patientcamerapref', pieChartsSchema);
+
 
 module.exports = pieChart;

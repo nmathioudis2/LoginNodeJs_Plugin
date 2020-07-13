@@ -11,6 +11,7 @@ module.exports = {
     //Sign Up Patients
     signUp: async (req, res, next) => {
         const {Name, Surname, Age, Registered, Image} = req.value.body;
+
         //check if user exists
         const foundPatient = await Patient.findOne({Surname});
         if (foundPatient) {

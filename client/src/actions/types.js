@@ -15,4 +15,5 @@ export const GET_ACTIVITY = 'GET_ACTIVITY';
 export const UPDATE_RULES= 'UPDATE_RULES';
 export const RULES_ERROR = 'RULES_ERROR';
 export const POST_CHART = 'POST_CHART';
-export const CHARTS_ERROR = 'CHARTS_ERROR';
+export const CHARTS_ERROR = 'CHARTS_ERROR'
+export const POST_LINE = 'POST_LINE';

@@ -17,7 +17,8 @@ import {
     UPDATE_RULES,
     RULES_ERROR,
     POST_CHART,
-    CHARTS_ERROR
+    CHARTS_ERROR,
+    POST_LINE
 } from "./types";
 import React from "react";
 
@@ -164,10 +165,13 @@ export const fetchPatientData = data => {
     return async dispatch => {
         try {
             const res = await axios.post('http://localhost:5000/patient/fetchPatientEvents', data)
-            console.log(res.data[0])
+            var json =res.data
+            // json = JSON.parse(JSON.stringify(json).split('"StartTime":').join('"Time":'));
+            // json = JSON.parse(JSON.stringify(json).split('"EventDate":').join('"Date":'));
+            // console.log(json)
             dispatch({
                 type: GET_PATIENT_DATA,
-                payload: res.data
+                payload: json
             });
         } catch (error) {
             dispatch({
@@ -262,13 +266,49 @@ export const fetchLocationPreferences = data => {
             // console.log(res);
             // console.log(res.data.patientCameraPrefs);
             let {Camera0, Camera1} = res.data.patientCameraPrefs[0];
-            let resData = [parseInt(Camera0,10), parseInt(Camera1,10)];
+            let resData = [parseInt(Camera0, 10), parseInt(Camera1, 10)];
             // console.log(resData);
             // console.log('camera0 ' + Camera0);
             // console.log('camera1 ' + Camera1);
             dispatch({
                 type: POST_CHART,
                 payload: resData
+            });
+        } catch (error) {
+            dispatch({
+                type: CHARTS_ERROR,
+                payload: ' You must select between active and inactive'
+            })
+
+        }
+    }
+};
+
+export const fetchLineTimeDiagramData = data => {
+    return async dispatch => {
+        try {
+            // console.log(data);
+            const res = await axios.post('http://localhost:5000/charts/lineTimeDiagram', data);
+
+
+            console.log(res.data.patienttimediagrams)
+            let k=0
+            var jsonData={};
+            for (var i in res.data.patienttimediagrams[0].Events) {
+                // console.log(res.data.patienttimediagrams[0].Events[k]);
+                let date = res.data.patienttimediagrams[0].Events[k].Time;
+                let camera = res.data.patienttimediagrams[0].Events[k].Camera;
+                let slicedDate1= date.slice(0,10);
+                let slicedDate2= date.slice(12,19);
+                let slicedDate = date.slice(0,16)
+                jsonData[slicedDate1] = camera;
+                let dataa={"2017-05-13": 2, "2017-05-14": 5, "2017-05-16": 2,"2017-05-17": 2,"2017-05-18": 2,"2017-05-19": 2,"2017-05-20": 4}
+                k = k+1
+            }
+
+            dispatch({
+                type: POST_LINE,
+                payload: jsonData
             });
         } catch (error) {
             dispatch({

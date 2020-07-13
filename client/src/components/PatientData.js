@@ -37,7 +37,7 @@ class PatientData extends Component {
             return (
                 <tr key={Event}>
                     <td>{Event}</td>
-                    <td>{EventDate}</td>
+                    <td>{EventDate.slice(0,10)}</td>
                     <td>{StartTime}</td>
                     <td>{Duration}</td>
                 </tr>
